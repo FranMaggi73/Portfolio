@@ -56,13 +56,6 @@
       </button>
       <div class="divider m-0 p-0" />
       <li><a href="/">Homepage</a></li>
-      <div class="divider m-0 p-0" />
-      <li><a href="/games/flashcards">FlashCardGames</a></li>
-      <div class="divider m-0 p-0" />
-      <li><a href="/admin">Admin</a></li>
-      <div class="divider m-0 p-0" />
-      <li><a href="/presets">Presets</a></li>
-      <div class="divider m-0 p-0" />
     </ul>
   </div>
 </div>
