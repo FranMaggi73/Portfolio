@@ -1,21 +1,21 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  let currentTheme = 'dark';
+  let currentTheme = 'night';
 
   const toggleTheme = () => {
-    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    currentTheme = currentTheme === 'cupcake' ? 'night' : 'cupcake';
     document.documentElement.setAttribute('data-theme', currentTheme);
     localStorage.setItem('theme', currentTheme);
   };
 
   onMount(() => {
     const storedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: night)').matches;
 
     if (storedTheme) {
       currentTheme = storedTheme;
     } else {
-      currentTheme = prefersDark ? 'dark' : 'light';
+      currentTheme = prefersDark ? 'night' : 'cupcake';
       localStorage.setItem('theme', currentTheme);
     }
 
@@ -43,7 +43,7 @@
     </svg>
     <input
       type="checkbox"
-      checked={currentTheme === 'dark'}
+      checked={currentTheme === 'night'}
       on:change={toggleTheme}
       class="toggle theme-controller"
     />

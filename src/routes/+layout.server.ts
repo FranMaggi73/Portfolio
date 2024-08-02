@@ -52,13 +52,6 @@ export const load: LayoutServerLoad = async ({ request }) => {
     });
   }
 
-  // const config = await getConfiguration();
-
-  // const apiInstance = new UsersApi(config);
-
-  // const users = await apiInstance.getUsers();
-  // console.log('users', users);
-
   return {
     isAuthenticated,
     userProfile

@@ -40,7 +40,6 @@
         class="menu menu-sm dropdown-content mt-4 z-[1] shadow bg-base-200 mr-2 rounded-box items-center w-36 mx-auto my-auto"
       >
         <li><a href="/profile"> Profile </a></li>
-        <li><a href="/">Settings</a></li>
         <li><a href="/api/auth/logout">Logout</a></li>
         <li class="mt-2"><ThemeSwitcher /></li>
       </ul>
