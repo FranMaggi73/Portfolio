@@ -1,8 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-    import { pageTitle } from '../../store/titleStore';
+  import { pageTitle } from '../../store/titleStore';
   pageTitle.set('Dino Jump');
-
 
   let dinoPosX: number = 42;
   let dinoPosY: number = 22;
@@ -46,7 +45,6 @@
     ground = document.querySelector('.ground') as HTMLElement;
     container.addEventListener('click', RestartGame);
     container.addEventListener('click', () => Jump());
-
   }
 
   function Loop() {
@@ -124,18 +122,19 @@
   function CreateObstacle() {
     const posX: number = window.innerWidth;
     obstacles.push({ posX, class: Math.random() > 0.5 ? 'cactus2' : 'cactus' });
-    timeUntilObstacle = obstacleMinTime + Math.random() * (obstacleMaxTime - obstacleMinTime) / gameVel;
+    timeUntilObstacle =
+      obstacleMinTime + (Math.random() * (obstacleMaxTime - obstacleMinTime)) / gameVel;
   }
 
   function CreateCloud() {
     const posX: number = window.innerWidth;
     const posY: number = minCloudY + Math.random() * (maxCloudY - minCloudY);
     clouds.push({ posX, posY });
-    timeUntilCloud = cloudMinTime + Math.random() * (cloudMaxTime - cloudMinTime) / gameVel;
+    timeUntilCloud = cloudMinTime + (Math.random() * (cloudMaxTime - cloudMinTime)) / gameVel;
   }
 
   function MoveObstacles() {
-    obstacles = obstacles.filter(obstacle => {
+    obstacles = obstacles.filter((obstacle) => {
       if (obstacle.posX < -46) {
         GainPoints();
         return false;
@@ -147,7 +146,7 @@
   }
 
   function MoveClouds() {
-    clouds = clouds.filter(cloud => {
+    clouds = clouds.filter((cloud) => {
       if (cloud.posX < -92) {
         return false;
       } else {
@@ -187,9 +186,11 @@
       const obstacleWidth = obstacle.class === 'cactus2' ? 98 : 46;
       const obstacleHeight = obstacle.class === 'cactus2' ? 66 : 96;
 
-      if (obstacle.posX < dinoPosX + dinoWidth &&
-          obstacle.posX + obstacleWidth > dinoPosX &&
-          dinoPosY < groundY + obstacleHeight) {
+      if (
+        obstacle.posX < dinoPosX + dinoWidth &&
+        obstacle.posX + obstacleWidth > dinoPosX &&
+        dinoPosY < groundY + obstacleHeight
+      ) {
         GameOver();
         break;
       }
@@ -222,6 +223,25 @@
     }
   }
 </script>
+
+<main
+  class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"
+>
+  <div class="container">
+    <div class="ground bg-repeat-x bg-ground"></div>
+    {#each obstacles as { posX, class: obstacleClass }}
+      <div class={`cactus ${obstacleClass}`} style="left: {posX}px;"></div>
+    {/each}
+    {#each clouds as { posX, posY }}
+      <div class="cloud" style="left: {posX}px; bottom: {posY}px;"></div>
+    {/each}
+    <div class={`dino ${dinoClass}`} style="bottom: {dinoPosY}px; left: {dinoPosX}px;"></div>
+    <div class="score text-pink-500 font-bold text-right">{score}</div>
+    <div class={`game-over ${gameOver ? 'active' : 'hidden'}`}>
+      GAME OVER<br />Click to play again
+    </div>
+  </div>
+</main>
 
 <style>
   .container {
@@ -346,21 +366,3 @@
     }
   }
 </style>
-
-<main class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto">
-    <div class="container">
-      <div class="ground bg-repeat-x bg-ground"></div>
-      {#each obstacles as { posX, class: obstacleClass }}
-      <div class={`cactus ${obstacleClass}`} style="left: {posX}px;"></div>
-      {/each}
-      {#each clouds as { posX, posY }}
-      <div class="cloud" style="left: {posX}px; bottom: {posY}px;"></div>
-      {/each}
-      <div class={`dino ${dinoClass}`} style="bottom: {dinoPosY}px; left: {dinoPosX}px;"></div>
-      <div class="score text-pink-500 font-bold text-right">{score}</div>
-      <div class={`game-over ${gameOver ? 'active' : 'hidden'}`}>
-        GAME OVER<br>Click to play again
-      </div>
-    </div>
-  </main>
-  

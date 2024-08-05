@@ -63,7 +63,9 @@
   });
 </script>
 
-<main class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto">
+<main
+  class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"
+>
   <div class="bg-base-300 p-6 rounded-lg shadow-lg max-w-md w-full">
     <div class="mb-4 text-3xl min-h-[3rem] flex items-center justify-end">
       <div class="ml-2">{currentInput}</div>
@@ -71,25 +73,37 @@
     <div class="grid grid-cols-4 gap-2">
       <button class="col-span-2 bg-red-500 text-white p-4 rounded" on:click={clear}>AC</button>
       <button class="bg-yellow-500 text-white p-4 rounded" on:click={deleteLast}>DEL</button>
-      <button class="bg-blue-500 text-white p-4 rounded" on:click={() => chooseOperation('÷')}>÷</button>
+      <button class="bg-blue-500 text-white p-4 rounded" on:click={() => chooseOperation('÷')}
+        >÷</button
+      >
 
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(1)}>1</button>
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(2)}>2</button>
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(3)}>3</button>
-      <button class="bg-blue-500 text-white p-4 rounded" on:click={() => chooseOperation('*')}>*</button>
+      <button class="bg-blue-500 text-white p-4 rounded" on:click={() => chooseOperation('*')}
+        >*</button
+      >
 
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(4)}>4</button>
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(5)}>5</button>
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(6)}>6</button>
-      <button class="bg-blue-500 text-white p-4 rounded" on:click={() => chooseOperation('+')}>+</button>
+      <button class="bg-blue-500 text-white p-4 rounded" on:click={() => chooseOperation('+')}
+        >+</button
+      >
 
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(7)}>7</button>
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(8)}>8</button>
       <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber(9)}>9</button>
-      <button class="bg-blue-500 text-white p-4 rounded" on:click={() => chooseOperation('-')}>-</button>
+      <button class="bg-blue-500 text-white p-4 rounded" on:click={() => chooseOperation('-')}
+        >-</button
+      >
 
-      <button class="col-span-2 text-black bg-gray-300 p-4 rounded" on:click={() => appendNumber(0)}>0</button>
-      <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber('.')}>.</button>
+      <button class="col-span-2 text-black bg-gray-300 p-4 rounded" on:click={() => appendNumber(0)}
+        >0</button
+      >
+      <button class="bg-gray-300 text-black p-4 rounded" on:click={() => appendNumber('.')}
+        >.</button
+      >
       <button class="bg-green-500 text-white p-4 rounded" on:click={compute}>=</button>
     </div>
   </div>
