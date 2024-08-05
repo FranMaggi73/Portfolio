@@ -51,7 +51,7 @@
 
   function Loop() {
     const now: number = Date.now();
-    deltaTime = (now - lastTime) / 1000; // Convert to seconds
+    deltaTime = (now - lastTime) / 1000;
     lastTime = now;
 
     if (!stopped) {
@@ -160,13 +160,13 @@
   function GainPoints() {
     score++;
     if (score === 5) {
-      gameVel = 1.5;
+      gameVel = 1.2;
       document.querySelector('.container')?.classList.add('noon');
     } else if (score === 10) {
-      gameVel = 2;
+      gameVel = 1.5;
       document.querySelector('.container')?.classList.add('afternoon');
     } else if (score === 20) {
-      gameVel = 3;
+      gameVel = 1.7;
       document.querySelector('.container')?.classList.add('night');
     }
   }
