@@ -354,7 +354,7 @@
   }
 
   .game-over.active {
-    display: block; /* Show when active */
+    display: block;
   }
 
   @keyframes animateDino {
