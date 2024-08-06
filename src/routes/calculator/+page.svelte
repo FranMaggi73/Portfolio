@@ -76,29 +76,48 @@
       <button class="btn btn-primary text-white p-4 rounded" on:click={() => chooseOperation('÷')}
         >÷</button
       >
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(1)}>1</button>
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(2)}>2</button>
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(3)}>3</button>
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(1)}
+        >1</button
+      >
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(2)}
+        >2</button
+      >
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(3)}
+        >3</button
+      >
       <button class="btn btn-primary text-white p-4 rounded" on:click={() => chooseOperation('*')}
         >*</button
       >
 
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(4)}>4</button>
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(5)}>5</button>
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(6)}>6</button>
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(4)}
+        >4</button
+      >
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(5)}
+        >5</button
+      >
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(6)}
+        >6</button
+      >
       <button class="btn btn-primary text-white p-4 rounded" on:click={() => chooseOperation('+')}
         >+</button
       >
 
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(7)}>7</button>
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(8)}>8</button>
-      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(9)}>9</button>
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(7)}
+        >7</button
+      >
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(8)}
+        >8</button
+      >
+      <button class="btn btn-secondary text-black p-4 rounded" on:click={() => appendNumber(9)}
+        >9</button
+      >
       <button class="btn btn-primary text-white p-4 rounded" on:click={() => chooseOperation('-')}
         >-</button
       >
 
-      <button class="btn btn-secondary col-span-2 text-black p-4 rounded" on:click={() => appendNumber(0)}
-        >0</button
+      <button
+        class="btn btn-secondary col-span-2 text-black p-4 rounded"
+        on:click={() => appendNumber(0)}>0</button
       >
       <button class="btn btn-primary text-black p-4 rounded" on:click={() => appendNumber('.')}
         >.</button
