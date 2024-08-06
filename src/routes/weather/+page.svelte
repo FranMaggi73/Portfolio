@@ -19,8 +19,9 @@
   let filteredCountryNames: Country[] = [];
 
   $: {
-    filteredCountryNames = countries
-      .filter((word) => word.name.toLowerCase().includes(searchTermWord.toLowerCase()))
+    filteredCountryNames = countries.filter((word) =>
+      word.name.toLowerCase().includes(searchTermWord.toLowerCase())
+    );
   }
 
   const showWeather = (data: any) => {
@@ -35,7 +36,7 @@
 
     const content = document.createElement('div');
     content.innerHTML = `
-      <h5>Clima en ${name}</h5>
+      <h6 class="font-bold">weather in ${name}</h6>
       <img src="https://openweathermap.org/img/wn/${arr.icon}@2x.png" alt="icon">
       <h2>${degrees}°C</h2>
       <p>Max: ${max}°C</p>
@@ -62,11 +63,12 @@
     } else if (data.error) {
       result.innerHTML = `<p>${data.error}</p>`;
     }
-    
   });
 </script>
 
-<main class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto">
+<main
+  class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"
+>
   <section class="weather-content bg-base-200 p-6 rounded-lg shadow-md w-1/2">
     <h1 class="text-2xl mb-4 text-center">Weather App</h1>
     <div class="result mb-8"></div>
@@ -86,9 +88,9 @@
         />
         {#if showOptions}
           <div
-            class="absolute z-10 bg-base-100 mt-1 w-full border border-base-300 rounded-md overflow-auto max-h-28 "
+            class="absolute z-10 bg-base-100 mt-1 w-full border border-base-300 rounded-md overflow-auto max-h-28"
           >
-            {#each filteredCountryNames as {name}}
+            {#each filteredCountryNames as { name }}
               <button
                 type="button"
                 class="cursor-pointer hover:bg-base-200 p-2 w-full text-left"
@@ -106,7 +108,3 @@
     </form>
   </section>
 </main>
-
-<style global>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
-</style>
