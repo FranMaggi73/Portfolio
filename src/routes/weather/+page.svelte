@@ -2,6 +2,8 @@
   import { onMount } from 'svelte';
   import type { PageData } from './$types';
   import { countries } from '$lib/types';
+  import { pageTitle } from '../../store/titleStore';
+  pageTitle.set('Weather App');
 
   export let data: PageData;
 

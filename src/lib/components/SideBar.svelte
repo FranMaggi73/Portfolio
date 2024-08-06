@@ -60,6 +60,10 @@
       <li><a href="/dinoJump">Dino Jump</a></li>
       <div><div class="divider m-0 p-0" /></div>
       <li><a href="/calculator">Calculator</a></li>
+      <div><div class="divider m-0 p-0" /></div>
+      <li><a href="/profile">Profile</a></li>
+      <div><div class="divider m-0 p-0" /></div>
+      <li><a href="/weather">Weather App</a></li>
     </ul>
   </div>
 </div>
