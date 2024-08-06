@@ -1,10 +1,25 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { PageData } from './$types';
+  import { countries } from '$lib/types';
+
   export let data: PageData;
 
-  let country = '';
+  type Country = {
+    name: string;
+    abbreviation: string;
+  };
+
+  let showOptions = false;
   let result: HTMLElement;
+  let selectedCountry: Country['name'] = '';
+  let searchTermWord = '';
+  let filteredCountryNames: Country[] = [];
+
+  $: {
+    filteredCountryNames = countries
+      .filter((word) => word.name.toLowerCase().includes(searchTermWord.toLowerCase()))
+  }
 
   const showWeather = (data: any) => {
     const {
@@ -34,7 +49,8 @@
   };
 
   const handleSubmit = (event: Event) => {
-    location.href = `/weather?country=${country}`;
+    event.preventDefault();
+    location.href = `/weather?country=${searchTermWord}`;
   };
 
   onMount(() => {
@@ -42,40 +58,49 @@
     if (data.weather) {
       showWeather(data.weather);
     } else if (data.error) {
-      result.innerHTML = `<p class="alert-message">${data.error}</p>`;
+      result.innerHTML = `<p>${data.error}</p>`;
     }
+    
   });
 </script>
 
-<main
-  class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"
->
+<main class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto">
   <section class="weather-content bg-base-200 p-6 rounded-lg shadow-md w-1/2">
     <h1 class="text-2xl mb-4 text-center">Weather App</h1>
     <div class="result mb-8"></div>
-    <form class="get-weather flex flex-col" method="GET">
-      <select
-        id="country"
-        name="country"
-        bind:value={country}
-        required
-        class="mb-4 p-3 input-bordered input"
-      >
-        <option disabled selected value="">Select the country</option>
-        <option value="Argentina">Argentina</option>
-        <option value="Colombia">Colombia</option>
-        <option value="Costa Rica">Costa Rica</option>
-        <option value="España">España</option>
-        <option value="Estados Unidos">Estados Unidos</option>
-        <option value="México">México</option>
-        <option value="Perú">Perú</option>
-      </select>
-      <input
-        type="submit"
-        value="Get Weather"
-        on:click={handleSubmit}
-        class="btn btn-success transition-all"
-      />
+    <form class="get-weather flex flex-col" on:submit={handleSubmit}>
+      <div class="relative input-container mb-4">
+        <input
+          required
+          type="text"
+          class="input input-bordered font-bold w-full mt-4"
+          bind:value={searchTermWord}
+          placeholder={selectedCountry || 'Search the country'}
+          on:click={() => (showOptions = !showOptions)}
+          on:focus={() => {
+            selectedCountry = '';
+            searchTermWord = '';
+          }}
+        />
+        {#if showOptions}
+          <div
+            class="absolute z-10 bg-base-100 mt-1 w-full border border-base-300 rounded-md overflow-auto max-h-28 "
+          >
+            {#each filteredCountryNames as {name}}
+              <button
+                type="button"
+                class="cursor-pointer hover:bg-base-200 p-2 w-full text-left"
+                on:click={() => {
+                  searchTermWord = name;
+                  showOptions = false;
+                }}
+                >{name}
+              </button>
+            {/each}
+          </div>
+        {/if}
+      </div>
+      <input type="submit" value="Get Weather" class="btn btn-success transition-all" />
     </form>
   </section>
 </main>
