@@ -7,6 +7,8 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
     return { weather: null };
   }
 
+  console.log({ country });
+
   const apiId = '41d1d7f5c2475b3a16167b30bc4f265c';
   const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${apiId}`;
 

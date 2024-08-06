@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import type { PageData } from './$types';
   import { countries } from '$lib/types';
   import { pageTitle } from '../../store/titleStore';
@@ -17,6 +17,8 @@
   let selectedCountry: Country['name'] = '';
   let searchTermWord = '';
   let filteredCountryNames: Country[] = [];
+  let inputRef: HTMLInputElement;
+  let optionsRef: HTMLDivElement;
 
   $: {
     filteredCountryNames = countries.filter((word) =>
@@ -25,26 +27,28 @@
   }
 
   const showWeather = (data: any) => {
-    const {
-      name,
-      main: { temp, temp_min, temp_max },
-      weather: [arr]
-    } = data;
-    const degrees = kelvinToCentigrade(temp);
-    const min = kelvinToCentigrade(temp_min);
-    const max = kelvinToCentigrade(temp_max);
+    if (typeof window !== 'undefined') {
+      const {
+        name,
+        main: { temp, temp_min, temp_max },
+        weather: [arr]
+      } = data;
+      const degrees = kelvinToCentigrade(temp);
+      const min = kelvinToCentigrade(temp_min);
+      const max = kelvinToCentigrade(temp_max);
 
-    const content = document.createElement('div');
-    content.innerHTML = `
-      <h6 class="font-bold">weather in ${name}</h6>
-      <img src="https://openweathermap.org/img/wn/${arr.icon}@2x.png" alt="icon">
-      <h2>${degrees}°C</h2>
-      <p>Max: ${max}°C</p>
-      <p>Min: ${min}°C</p>
-    `;
+      const content = document.createElement('div');
+      content.innerHTML = `
+        <h6 class="font-bold">Weather in ${name}</h6>
+        <img src="https://openweathermap.org/img/wn/${arr.icon}@2x.png" alt="icon">
+        <h2>${degrees}°C</h2>
+        <p>Max: ${max}°C</p>
+        <p>Min: ${min}°C</p>
+      `;
 
-    result.innerHTML = '';
-    result.appendChild(content);
+      result.innerHTML = '';
+      result.appendChild(content);
+    }
   };
 
   const kelvinToCentigrade = (temp: number) => {
@@ -56,12 +60,32 @@
     location.href = `/weather?country=${searchTermWord}`;
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      optionsRef &&
+      !optionsRef.contains(event.target as Node) &&
+      !inputRef.contains(event.target as Node)
+    ) {
+      showOptions = false;
+    }
+  };
+
   onMount(() => {
-    result = document.querySelector('.result')!;
-    if (data.weather) {
-      showWeather(data.weather);
-    } else if (data.error) {
-      result.innerHTML = `<p>${data.error}</p>`;
+    if (typeof window !== 'undefined') {
+      result = document.querySelector('.result')!;
+      if (data.weather) {
+        showWeather(data.weather);
+      } else if (data.error) {
+        result.innerHTML = `<p>${data.error}</p>`;
+      }
+
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+  });
+
+  onDestroy(() => {
+    if (typeof window !== 'undefined') {
+      document.removeEventListener('mousedown', handleClickOutside);
     }
   });
 </script>
@@ -78,6 +102,7 @@
           required
           type="text"
           class="input input-bordered font-bold w-full mt-4"
+          bind:this={inputRef}
           bind:value={searchTermWord}
           placeholder={selectedCountry || 'Search the country'}
           on:click={() => (showOptions = !showOptions)}
@@ -89,6 +114,7 @@
         {#if showOptions}
           <div
             class="absolute z-10 bg-base-100 mt-1 w-full border border-base-300 rounded-md overflow-auto max-h-28"
+            bind:this={optionsRef}
           >
             {#each filteredCountryNames as { name }}
               <button
@@ -96,6 +122,7 @@
                 class="cursor-pointer hover:bg-base-200 p-2 w-full text-left"
                 on:click={() => {
                   searchTermWord = name;
+                  selectedCountry = name;
                   showOptions = false;
                 }}
                 >{name}
