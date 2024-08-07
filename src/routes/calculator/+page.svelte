@@ -66,7 +66,7 @@
 <main
   class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"
 >
-  <div class="bg-base-200 p-6 rounded-lg shadow-lg max-w-md w-full">
+  <div class="bg-neutral p-6 rounded-lg shadow-lg max-w-md w-full">
     <div class="mb-4 text-3xl min-h-[3rem] flex items-center justify-end input-bordered input">
       <div class="ml-2">{currentInput}</div>
     </div>

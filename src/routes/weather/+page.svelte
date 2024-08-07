@@ -19,6 +19,7 @@
   let filteredCountryNames: Country[] = [];
   let inputRef: HTMLInputElement;
   let optionsRef: HTMLDivElement;
+  let showTitle = true;
 
   $: {
     filteredCountryNames = countries.filter((word) =>
@@ -27,6 +28,7 @@
   }
 
   const showWeather = (data: any) => {
+    showTitle = false;
     if (typeof window !== 'undefined') {
       const {
         name,
@@ -39,11 +41,13 @@
 
       const content = document.createElement('div');
       content.innerHTML = `
-        <h6 class="font-bold">Weather in ${name}</h6>
+      <div class="flex flex-col items-center">
+        <h6 class="font-bold text-xl">Weather in ${name}</h6>
         <img src="https://openweathermap.org/img/wn/${arr.icon}@2x.png" alt="icon">
         <h2>${degrees}°C</h2>
         <p>Max: ${max}°C</p>
         <p>Min: ${min}°C</p>
+      </div>
       `;
 
       result.innerHTML = '';
@@ -93,8 +97,10 @@
 <main
   class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"
 >
-  <section class="weather-content bg-base-200 p-6 rounded-lg shadow-md w-1/2">
+  <section class="weather-content bg-neutral text-neutral-content p-6 rounded-lg shadow-md w-1/2">
+    {#if showTitle}
     <h1 class="text-2xl mb-4 text-center">Weather App</h1>
+    {/if}
     <div class="result mb-8"></div>
     <form class="get-weather flex flex-col" on:submit={handleSubmit}>
       <div class="relative input-container mb-4">
