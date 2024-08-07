@@ -3,7 +3,7 @@
   import type { PageData } from './$types';
   import { countries } from '$lib/types';
   import { pageTitle } from '../../store/titleStore';
-  pageTitle.set('Weather App');
+  pageTitle.set('Weather');
 
   export let data: PageData;
 
@@ -11,6 +11,18 @@
     name: string;
     abbreviation: string;
   };
+
+  interface WeatherData {
+    name: string;
+    main: {
+      temp: number;
+      temp_min: number;
+      temp_max: number;
+    };
+    weather: Array<{
+      icon: string;
+    }>;
+  }
 
   let showOptions = false;
   let result: HTMLElement;
@@ -27,7 +39,7 @@
     );
   }
 
-  const showWeather = (data: any) => {
+  const showWeather = (data: WeatherData) => {
     showTitle = false;
     if (typeof window !== 'undefined') {
       const {
@@ -97,11 +109,13 @@
 <main
   class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"
 >
-  <section class="weather-content bg-neutral text-neutral-content p-6 rounded-lg shadow-md w-1/2">
+  <section
+    class="weather-content bg-neutral sm:w-4/5 md:w-4/5 lg:w-4/5 xl:w-1/2 text-neutral-content p-6 rounded-lg shadow-md"
+  >
     {#if showTitle}
-    <h1 class="text-2xl mb-4 text-center">Weather App</h1>
+      <h1 class="text-2xl mb-4 text-center">Weather</h1>
     {/if}
-    <div class="result mb-8"></div>
+    <div class="result mb-4"></div>
     <form class="get-weather flex flex-col" on:submit={handleSubmit}>
       <div class="relative input-container mb-4">
         <input
@@ -119,7 +133,7 @@
         />
         {#if showOptions}
           <div
-            class="absolute z-10 bg-base-100 mt-1 w-full border border-base-300 rounded-md overflow-auto max-h-28"
+            class="absolute z-10 bg-base-100 text-base-content mt-1 w-full border border-base-300 rounded-md overflow-auto max-h-28"
             bind:this={optionsRef}
           >
             {#each filteredCountryNames as { name }}

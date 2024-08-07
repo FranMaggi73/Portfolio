@@ -47,7 +47,7 @@
     container = document.querySelector('.container') as HTMLElement;
     ground = document.querySelector('.ground') as HTMLElement;
     container.addEventListener('click', () => {
-      if (!gameStart) {
+      if (!gameStart && !gameOver && !getReady) {
         StartCountdown();
       } else if (gameOver) {
         RestartGame();
@@ -57,13 +57,13 @@
     });
   }
 
-    function StartCountdown() {
+  function StartCountdown() {
     const interval = setInterval(() => {
       countdown--;
       if (countdown <= 0) {
         clearInterval(interval);
         gameStart = true;
-        countdown = 3; 
+        countdown = 3;
         requestAnimationFrame(Loop);
       }
     }, 1000);
@@ -195,13 +195,9 @@
   }
 
   function GameOver() {
-    Crash();
-    gameOver = true;
-  }
-
-  function Crash() {
     dinoClass = 'dino-crashed';
     stopped = true;
+    gameOver = true;
   }
 
   function DetectCollision() {
@@ -228,7 +224,6 @@
       dinoClass = 'dino-running';
       obstacles = [];
       clouds = [];
-      score = -1;
       gameVel = 1;
       gameOver = false;
       groundX = 0;
@@ -244,7 +239,12 @@
       timeUntilCloud = 0.5;
       gameStart = false;
       countdown = 3;
-      getReady=true;
+      getReady = true;
+      score = -1;
+
+      document.querySelector('.container')?.classList.remove('noon');
+      document.querySelector('.container')?.classList.remove('afternoon');
+      document.querySelector('.container')?.classList.remove('night');
 
       StartCountdown();
     }
@@ -258,7 +258,9 @@
     <div class="ground bg-repeat-x bg-ground"></div>
     {#if !gameStart && countdown > 0}
       <div class="start-message justify-center text-center text-secondary text-3xl font-bold">
-        {#if getReady !== true}Click to start<br />{:else}Get ready<br />{/if}<span class="countdown mt-5 text-3xl text-success justify-center text-center">{countdown}</span>
+        {#if getReady !== true}Click to start<br />{:else}Get ready<br />{/if}<span
+          class="countdown mt-5 text-3xl text-success justify-center text-center">{countdown}</span
+        >
       </div>
     {/if}
     {#each obstacles as { posX, class: obstacleClass }}
@@ -269,8 +271,7 @@
     {/each}
     <div class={`dino ${dinoClass}`} style="bottom: {dinoPosY}px; left: {dinoPosX}px;"></div>
     {#if gameStart && countdown > 0}
-
-    <div class="score text-pink-500 font-bold text-right">{score}</div>
+      <div class="score text-pink-500 font-bold text-right">{score}</div>
     {/if}
     <div class={`game-over text-3xl text-error font-bold ${gameOver ? 'active' : 'hidden'}`}>
       GAME OVER<br /><span class="text-success text-3xl font-bold">Click to play again</span>
@@ -278,10 +279,8 @@
   </div>
 </main>
 
-
 <style>
-
-.countdown {
+  .countdown {
     position: absolute;
     width: 100%;
     z-index: 4;
