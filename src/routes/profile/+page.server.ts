@@ -8,11 +8,6 @@ export async function load({ request }: RequestEvent) {
   let userProfile = null;
   if (isAuthenticated) {
     userProfile = await kindeAuthClient.getUser(request as unknown as SessionManager);
-
-    console.log({
-      isAuthenticated,
-      userProfile
-    });
   }
   if (!isAuthenticated) {
     redirect(307, '/api/auth/login');
