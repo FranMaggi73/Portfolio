@@ -8,9 +8,10 @@
   let dinoClass: string = 'dino-running';
   let obstacles: { posX: number; class: string }[] = [];
   let clouds: { posX: number; posY: number }[] = [];
-  let score: number = 0;
+  let score: number = -1;
   let gameVel: number = 1;
   let gameOver: boolean = false;
+  let gameStart: boolean = false;
   let groundX = 0;
 
   let deltaTime: number = 0;
@@ -33,6 +34,8 @@
   let cloudVel: number = 0.5;
   let ground: HTMLElement;
   let container: HTMLElement;
+  let countdown: number = 3;
+  let getReady = false;
 
   onMount(() => {
     Start();
@@ -43,8 +46,27 @@
     document.addEventListener('keydown', HandleKeyDown);
     container = document.querySelector('.container') as HTMLElement;
     ground = document.querySelector('.ground') as HTMLElement;
-    container.addEventListener('click', RestartGame);
-    container.addEventListener('click', () => Jump());
+    container.addEventListener('click', () => {
+      if (!gameStart) {
+        StartCountdown();
+      } else if (gameOver) {
+        RestartGame();
+      } else {
+        Jump();
+      }
+    });
+  }
+
+    function StartCountdown() {
+    const interval = setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        clearInterval(interval);
+        gameStart = true;
+        countdown = 3; 
+        requestAnimationFrame(Loop);
+      }
+    }, 1000);
   }
 
   function Loop() {
@@ -63,11 +85,13 @@
       velY -= gravity * deltaTime;
     }
 
-    requestAnimationFrame(Loop);
+    if (gameStart && !gameOver) {
+      requestAnimationFrame(Loop);
+    }
   }
 
   function HandleKeyDown(ev: KeyboardEvent) {
-    if (ev.keyCode === 32) {
+    if (ev.keyCode === 32 && gameStart && !gameOver) {
       Jump();
     }
   }
@@ -204,7 +228,7 @@
       dinoClass = 'dino-running';
       obstacles = [];
       clouds = [];
-      score = 0;
+      score = -1;
       gameVel = 1;
       gameOver = false;
       groundX = 0;
@@ -218,8 +242,11 @@
       scenarioVel = 1280 / 3;
       timeUntilObstacle = 2;
       timeUntilCloud = 0.5;
+      gameStart = false;
+      countdown = 3;
+      getReady=true;
 
-      requestAnimationFrame(Loop);
+      StartCountdown();
     }
   }
 </script>
@@ -229,6 +256,11 @@
 >
   <div class="container">
     <div class="ground bg-repeat-x bg-ground"></div>
+    {#if !gameStart && countdown > 0}
+      <div class="start-message justify-center text-center text-secondary text-3xl font-bold">
+        {#if getReady !== true}Click to start<br />{:else}Get ready<br />{/if}<span class="countdown mt-5 text-3xl text-success justify-center text-center">{countdown}</span>
+      </div>
+    {/if}
     {#each obstacles as { posX, class: obstacleClass }}
       <div class={`cactus ${obstacleClass}`} style="left: {posX}px;"></div>
     {/each}
@@ -236,14 +268,37 @@
       <div class="cloud" style="left: {posX}px; bottom: {posY}px;"></div>
     {/each}
     <div class={`dino ${dinoClass}`} style="bottom: {dinoPosY}px; left: {dinoPosX}px;"></div>
+    {#if gameStart && countdown > 0}
+
     <div class="score text-pink-500 font-bold text-right">{score}</div>
-    <div class={`game-over ${gameOver ? 'active' : 'hidden'}`}>
-      GAME OVER<br />Click to play again
+    {/if}
+    <div class={`game-over text-3xl text-error font-bold ${gameOver ? 'active' : 'hidden'}`}>
+      GAME OVER<br /><span class="text-success text-3xl font-bold">Click to play again</span>
     </div>
   </div>
 </main>
 
+
 <style>
+
+.countdown {
+    position: absolute;
+    width: 100%;
+    z-index: 4;
+    animation: countdownAnimation 1s infinite;
+  }
+
+  @keyframes countdownAnimation {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
   .container {
     width: 920px;
     height: 280px;
@@ -343,10 +398,16 @@
     position: absolute;
     width: 100%;
     text-align: center;
-    color: rgb(131, 176, 112);
-    font-size: 30px;
-    font-family: Verdana;
-    font-weight: 700;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .start-message {
+    position: absolute;
+    width: 100%;
+    text-align: center;
     z-index: 4;
     top: 50%;
     left: 50%;
