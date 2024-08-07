@@ -11,7 +11,7 @@
   <div class="navbar p-0 m-0">
     <SidelBar />
     <div class="flex-1 justify-center">
-      <p class="text-xl font-semibold mt-2">{$pageTitle}</p>
+      <p class="text-3xl font-semibold mt-2">{$pageTitle}</p>
     </div>
     <IconProfile {isAuthenticated} {profile} />
   </div>
