@@ -1,0 +1,193 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "imports": [
+      "_internal.js",
+      "_shared-server.js"
+    ],
+    "isEntry": true,
+    "src": ".svelte-kit/generated/server/internal.js"
+  },
+  "_KindeSDK.js": {
+    "file": "chunks/KindeSDK.js",
+    "imports": [
+      "_shared-server.js"
+    ]
+  },
+  "_exports.js": {
+    "file": "chunks/exports.js"
+  },
+  "_index.js": {
+    "file": "chunks/index.js"
+  },
+  "_index2.js": {
+    "file": "chunks/index2.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_internal.js": {
+    "dynamicImports": [
+      "src/hooks.server.ts"
+    ],
+    "file": "chunks/internal.js",
+    "imports": [
+      "_ssr.js",
+      "_shared-server.js"
+    ]
+  },
+  "_shared-server.js": {
+    "file": "chunks/shared-server.js"
+  },
+  "_ssr.js": {
+    "file": "chunks/ssr.js"
+  },
+  "_titleStore.js": {
+    "file": "chunks/titleStore.js",
+    "imports": [
+      "_index2.js"
+    ]
+  },
+  "_types.js": {
+    "file": "chunks/types.js"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_exports.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "imports": [
+      "_internal.js",
+      "_index.js",
+      "_exports.js",
+      "_index2.js",
+      "_shared-server.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js"
+  },
+  "src/hooks.server.ts": {
+    "file": "chunks/hooks.server.js",
+    "imports": [
+      "_KindeSDK.js",
+      "_index.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/hooks.server.ts"
+  },
+  "src/params/integer.ts": {
+    "file": "entries/matchers/integer.js",
+    "isEntry": true,
+    "src": "src/params/integer.ts"
+  },
+  "src/routes/+layout.server.ts": {
+    "file": "entries/pages/_layout.server.ts.js",
+    "imports": [
+      "_KindeSDK.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.server.ts"
+  },
+  "src/routes/+layout.svelte": {
+    "css": [
+      "_app/immutable/assets/_layout.BR-i_lDb.css"
+    ],
+    "file": "entries/pages/_layout.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_titleStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.svelte"
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_titleStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+page.svelte"
+  },
+  "src/routes/api/auth/[...kindeAuth]/+server.ts": {
+    "file": "entries/endpoints/api/auth/_...kindeAuth_/_server.ts.js",
+    "imports": [
+      "_KindeSDK.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/auth/[...kindeAuth]/+server.ts"
+  },
+  "src/routes/api/healthz/+server.ts": {
+    "file": "entries/endpoints/api/healthz/_server.ts.js",
+    "imports": [
+      "_types.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/healthz/+server.ts"
+  },
+  "src/routes/calculator/+page.svelte": {
+    "file": "entries/pages/calculator/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_titleStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/calculator/+page.svelte"
+  },
+  "src/routes/dinoJump/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.P-zxY1uY.css"
+    ],
+    "file": "entries/pages/dinoJump/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_titleStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/dinoJump/+page.svelte"
+  },
+  "src/routes/profile/+page.server.ts": {
+    "file": "entries/pages/profile/_page.server.ts.js",
+    "imports": [
+      "_KindeSDK.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/profile/+page.server.ts"
+  },
+  "src/routes/profile/+page.svelte": {
+    "file": "entries/pages/profile/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_titleStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/profile/+page.svelte"
+  },
+  "src/routes/weather/+page.server.ts": {
+    "file": "entries/pages/weather/_page.server.ts.js",
+    "imports": [
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/weather/+page.server.ts"
+  },
+  "src/routes/weather/+page.svelte": {
+    "file": "entries/pages/weather/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_types.js",
+      "_titleStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/weather/+page.svelte"
+  }
+}

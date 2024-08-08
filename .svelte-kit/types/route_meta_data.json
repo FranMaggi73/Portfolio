@@ -1,0 +1,26 @@
+{
+	"/": [
+		"src/routes/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/api/auth/[...kindeAuth]": [
+		"src/routes/api/auth/[...kindeAuth]/+server.ts"
+	],
+	"/api/healthz": [
+		"src/routes/api/healthz/+server.ts"
+	],
+	"/calculator": [
+		"src/routes/+layout.server.ts"
+	],
+	"/dinoJump": [
+		"src/routes/+layout.server.ts"
+	],
+	"/profile": [
+		"src/routes/profile/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/weather": [
+		"src/routes/weather/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	]
+}
