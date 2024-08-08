@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "svelte-kit build",
     "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d build",
     "test": "pnpm run test:integration && pnpm run test:unit",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -28,6 +29,7 @@
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-svelte": "2.35.1",
+    "gh-pages": "^6.1.1",
     "lefthook": "1.6.1",
     "postcss": "8.4.33",
     "prettier": "3.2.4",
@@ -43,6 +45,7 @@
   "type": "module",
   "dependencies": {
     "@kinde-oss/kinde-auth-sveltekit": "1.2.4",
+    "@sveltejs/adapter-static": "^3.0.2",
     "node-fetch": "3.3.2"
   }
 }
