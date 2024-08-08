@@ -17,7 +17,7 @@ const config = {
       fallback: null
     }),
     paths: {
-      base: process.env.NODE_ENV === 'production' ? '/portfolio' : ''
+      base: process.env.NODE_ENV === 'production' ? '/' : ''
     },
     alias: {
       $lib: 'src/lib'
