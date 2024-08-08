@@ -1,0 +1,12 @@
+import { c as create_ssr_component, e as escape } from './ssr-hqkys4DV.js';
+import { p as pageTitle } from './titleStore-CUcVodpM.js';
+import './index2-D1Xrjnhz.js';
+
+const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  pageTitle.set("Calculator");
+  let currentInput = "";
+  return `<main class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"><div class="bg-neutral p-6 rounded-lg shadow-lg max-w-md w-full mx-4"><div class="mb-4 text-3xl min-h-[3rem] flex items-center justify-end input-bordered input"><div class="ml-2">${escape(currentInput)}</div></div> <div class="grid grid-cols-4 gap-2"><button class="btn btn-error col-span-2 text-white p-4 rounded" data-svelte-h="svelte-4pci94">AC</button> <button class="btn btn-warning text-white p-4 rounded" data-svelte-h="svelte-1vcy3nz">DEL</button> <button class="btn btn-primary text-white p-4 rounded" data-svelte-h="svelte-t9pui6">÷</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-dw533r">1</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-1cd9g3x">2</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-h8g9n">3</button> <button class="btn btn-primary text-white p-4 rounded" data-svelte-h="svelte-j0bs1i">*</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-7w781h">4</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-1sf848n">5</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-bp2hjh">6</button> <button class="btn btn-primary text-white p-4 rounded" data-svelte-h="svelte-a20eni">+</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-10ga0b7">7</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-1ih4yit">8</button> <button class="btn btn-secondary text-black p-4 rounded" data-svelte-h="svelte-12q171z">9</button> <button class="btn btn-primary text-white p-4 rounded" data-svelte-h="svelte-1tw2q0e">-</button> <button class="btn btn-secondary col-span-2 text-black p-4 rounded" data-svelte-h="svelte-1cokofz">0</button> <button class="btn btn-primary text-black p-4 rounded" data-svelte-h="svelte-1m2i2gd">.</button> <button class="btn btn-success text-white p-4 rounded" data-svelte-h="svelte-jj86vu">=</button></div></div></main>`;
+});
+
+export { Page as default };
+//# sourceMappingURL=_page.svelte-D2p5HxI-.js.map
