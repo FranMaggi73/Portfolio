@@ -121,7 +121,7 @@
         <input
           required
           type="text"
-          class="input input-bordered font-bold w-full mt-4"
+          class="input input-bordered font-bold w-full mt-4 text-base-content"
           bind:this={inputRef}
           bind:value={searchTermWord}
           placeholder={selectedCountry || 'Search the country'}
