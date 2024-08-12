@@ -9,7 +9,7 @@
 <main
   class="flex-1 flex justify-center pb-32 items-center fixed h-dvh sm:pb-16 w-svw overflow-x-auto"
 >
-  <div class="hero skeleton h-fit w-fit hero-overlay text-center items-center">
+  <div class="hero skeleton h-fit w-fit hero-overlay text-center items-center border-20 shadow-lg">
     <div class="hero-content p-0 py-6 sm:py-2 m-3 sm:mx-8 flex-col sm:flex-row">
       <img class="rounded-box sm:mr-3" src={profile?.picture} alt="profile" />
       <div>

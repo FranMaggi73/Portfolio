@@ -8,7 +8,7 @@
   let dinoClass: string = 'dino-running';
   let obstacles: { posX: number; class: string }[] = [];
   let clouds: { posX: number; posY: number }[] = [];
-  let score: number = -1;
+  let score: number = 0;
   let gameVel: number = 1;
   let gameOver: boolean = false;
   let gameStart: boolean = false;
@@ -36,6 +36,7 @@
   let container: HTMLElement;
   let countdown: number = 3;
   let getReady = false;
+  let create = false;
 
   onMount(() => {
     Start();
@@ -51,7 +52,7 @@
         StartCountdown();
       } else if (gameOver) {
         RestartGame();
-      } else {
+      } else if (gameStart && !gameOver) {
         Jump();
       }
     });
@@ -64,9 +65,17 @@
         clearInterval(interval);
         gameStart = true;
         countdown = 3;
+
+        lastTime = Date.now();
+
+        timeUntilObstacle =
+          obstacleMinTime + (Math.random() * (obstacleMaxTime - obstacleMinTime)) / gameVel;
+        timeUntilCloud = cloudMinTime + (Math.random() * (cloudMaxTime - cloudMinTime)) / gameVel;
+
         requestAnimationFrame(Loop);
       }
     }, 1000);
+    create = true;
   }
 
   function Loop() {
@@ -131,14 +140,14 @@
 
   function DecideToCreateObstacles() {
     timeUntilObstacle -= deltaTime;
-    if (timeUntilObstacle <= 0) {
+    if (timeUntilObstacle <= 0 && create) {
       CreateObstacle();
     }
   }
 
   function DecideToCreateClouds() {
     timeUntilCloud -= deltaTime;
-    if (timeUntilCloud <= 0) {
+    if (timeUntilCloud <= 0 && create) {
       CreateCloud();
     }
   }
@@ -220,31 +229,27 @@
   function RestartGame() {
     if (gameOver) {
       dinoPosX = 42;
-      dinoPosY = 22;
+      dinoPosY = groundY;
+      velY = 0;
       dinoClass = 'dino-running';
+      jumping = false;
+
       obstacles = [];
       clouds = [];
+      score = 0;
       gameVel = 1;
-      gameOver = false;
       groundX = 0;
-      deltaTime = 0;
-      lastTime = Date.now();
       stopped = false;
-      jumping = false;
-      velY = 0;
-      impulse = 900;
-      gravity = 2500;
-      scenarioVel = 1280 / 3;
-      timeUntilObstacle = 2;
-      timeUntilCloud = 0.5;
+      gameOver = false;
       gameStart = false;
       countdown = 3;
+      lastTime = Date.now();
+      timeUntilObstacle = 2;
+      timeUntilCloud = 0.5;
       getReady = true;
-      score = -1;
 
-      document.querySelector('.container')?.classList.remove('noon');
-      document.querySelector('.container')?.classList.remove('afternoon');
-      document.querySelector('.container')?.classList.remove('night');
+      const containerElement = document.querySelector('.container');
+      containerElement?.classList.remove('noon', 'afternoon', 'night');
 
       StartCountdown();
     }
