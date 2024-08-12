@@ -13,7 +13,7 @@
         <h1 class="text-3xl font-bold">Hello, my name is Francisco Maggi, I'm a Developer</h1>
         <p class="py-6">Let me help you with your project</p>
         <button on:click={() => window.open('/CV.pdf')} class="btn btn-primary"
-          >Download Resume</button
+          >Check my resume!</button
         >
       </div>
     </div>
