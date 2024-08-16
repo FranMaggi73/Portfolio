@@ -22,7 +22,7 @@
     class="footer bg-neutral text-neutral-content justify-center items-center flex-1 flex flex-col sm:pb-10"
   >
     <nav class=" items-center flex flex-col">
-      <h6 class="footer-title text-center mb-4">Contact me</h6>
+      <h6 class="footer-title text-accent text-center mb-4">Contact me</h6>
       <div class="grid grid-cols-4 gap-4 justify-center">
         <a
           href="https://api.whatsapp.com/send?phone=543515593657"
@@ -31,7 +31,7 @@
           rel="noopener noreferrer"
         >
           <svg
-            class="w-6 h-6 text-gray-800 dark:text-white"
+            class="w-6 h-6 text-gray-800 text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -58,7 +58,7 @@
           rel="noopener noreferrer"
         >
           <svg
-            class="w-6 h-6 text-gray-800 dark:text-white"
+            class="w-6 h-6 text-gray-800 text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -81,7 +81,7 @@
           rel="noopener noreferrer"
         >
           <svg
-            class="w-6 h-6 text-gray-800 dark:text-white"
+            class="w-6 h-6 text-gray-800 text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -101,7 +101,7 @@
           rel="noopener noreferrer"
         >
           <svg
-            class="w-6 h-6 text-gray-800 dark:text-white"
+            class="w-6 h-6 text-gray-800 text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
