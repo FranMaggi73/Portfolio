@@ -24,7 +24,10 @@
 <div class="dropdown mt-2 z-10">
   <input bind:checked={drawerChecked} id="my-drawer-4" type="checkbox" class="drawer-toggle" />
   <div>
-    <label for="my-drawer-4" class="drawer-button btn btn-ghost ml-2">
+    <label
+      for="my-drawer-4"
+      class="drawer-button btn p-4 rounded-box border-neutral bg-base-300 glass cursor-pointer ml-2"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -43,7 +46,10 @@
   <div class="drawer-side">
     <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
     <ul class="menu p-2 w-80 h-full bg-base-200 text-base-content font-semibold">
-      <button id="close-button" class="btn btn-ghost h-14 w-14">
+      <button
+        id="close-button"
+        class="btn p-4 rounded-box border-neutral bg-base-300 glass cursor-pointer h-14 w-14"
+      >
         <svg
           class="fill-current"
           xmlns="http://www.w3.org/2000/svg"
