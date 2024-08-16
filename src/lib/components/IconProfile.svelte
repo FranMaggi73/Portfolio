@@ -23,13 +23,16 @@
 {#if isAuthenticated}
   <div class="dropdown dropdown-end">
     <div class="flex items-center gap-2 mt-2 mr-4">
-      <span class="cursor-pointer text-xl" tabindex="-1">{profile?.given_name || ''}</span>
+      <span
+        class="hidden lg:inline cursor-pointer text-xl font-semibold text-base-content"
+        tabindex="-1">{profile?.given_name || ''}</span
+      >
       <button
         class="btn btn-ghost btn-circle avatar"
         on:click={() => (isOpen = !isOpen)}
         tabindex="-1"
       >
-        <div class="bg-neutral text-neutral-content rounded-full w-12">
+        <div class="bg-neutral text-base-content rounded-full w-12">
           <img src={profile?.picture} alt="profile" />
         </div>
       </button>

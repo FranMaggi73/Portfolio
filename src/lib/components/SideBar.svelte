@@ -42,7 +42,7 @@
   </div>
   <div class="drawer-side">
     <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-    <ul class="menu p-2 w-80 h-full bg-base-200 text-base-content">
+    <ul class="menu p-2 w-80 h-full bg-base-200 text-base-content font-semibold">
       <button id="close-button" class="btn btn-ghost h-14 w-14">
         <svg
           class="fill-current"

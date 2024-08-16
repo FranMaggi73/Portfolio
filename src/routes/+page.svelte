@@ -4,12 +4,10 @@
   pageTitle.set('Portfolio');
 </script>
 
-<main
-  class="flex-1 flex flex-col justify-center items-center fixed sm:pb-20 h-screen w-full overflow-x-auto"
->
-  <div class="flex-1 flex flex-col w-full h-screen">
+<main class="flex-1 flex flex-col fixed sm:pb-20 h-screen w-full overflow-x-auto">
+  <div class="flex-1 flex flex-col w-full">
     <div
-      class="hero flex flex-col justify-center items-center w-full h-full lg:basis-2/3 xl:basis-2/3 2xl:basis-2/3 basis-1/2"
+      class="hero flex flex-col justify-center items-center lg:basis-2/3 xl:basis-2/3 2xl:basis-2/3 basis-1/2"
     >
       <div class="hero-content text-center">
         <div class="max-w-md">
@@ -22,10 +20,10 @@
       </div>
     </div>
     <footer
-      class="footer bg-neutral text-neutral-content justify-center items-center pb-4 flex flex-col w-full h-full md:basis-1/3 sm:basis-1/3 basis-1/2"
+      class="footer bg-neutral text-neutral-content justify-center items-center pb-24 sm:pb-4 flex flex-col md:basis-1/3 sm:basis-1/3 basis-1/2"
     >
       <nav class=" items-center flex flex-col">
-        <h6 class="footer-title text-accent text-center mb-4">Contact me</h6>
+        <h6 class="footer-title text-accent text-center">Contact me</h6>
         <div class="grid grid-cols-4 gap-4 justify-center">
           <a
             href="https://api.whatsapp.com/send?phone=543515593657"
