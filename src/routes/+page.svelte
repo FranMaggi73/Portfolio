@@ -7,7 +7,7 @@
 <main
   class="flex-1 flex flex-col justify-center items-center fixed h-screen sm:pb-10 w-full overflow-x-auto"
 >
-  <div class="hero flex-1 flex justify-center items-center w-full basis-1/3">
+  <div class="hero flex-1 flex justify-center items-center w-full basis-1/2">
     <div class="hero-content text-center">
       <div class="max-w-md">
         <h1 class="text-3xl font-bold">Hello, my name is Francisco Maggi, I'm a Developer</h1>
@@ -19,7 +19,7 @@
     </div>
   </div>
   <footer
-    class="footer bg-neutral text-neutral-content justify-center items-center flex-1 flex flex-col sm:pb-10"
+    class="footer bg-neutral text-neutral-content justify-center items-center flex-1 flex flex-col sm:pb-10 w-full basis-1/4"
   >
     <nav class=" items-center flex flex-col">
       <h6 class="footer-title text-accent text-center mb-4">Contact me</h6>
