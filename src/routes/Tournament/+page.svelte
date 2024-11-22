@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { pageTitle } from '../../store/titleStore';
   pageTitle.set('Tournament');
 
@@ -19,8 +20,8 @@
     result: 'win' | 'loss' | 'draw' | '';
   };
 
-  const maxRounds = 4;
-  let roundNumber = 0;
+  const maxRounds = 5;
+  let roundNumber = 1;
   let byesCount = 0;
   let players: Player[] = [];
   let playerName = '';
@@ -28,13 +29,61 @@
   let currentMatches: Match[] = [];
   let isModalOpen = false;
 
-  function toggleModal() {
-    isModalOpen = !isModalOpen;
+  onMount(() => {
+    const storedPlayers = localStorage.getItem('players');
+    const storedRoundNumber = localStorage.getItem('roundNumber');
+    const storedByesCount = localStorage.getItem('byesCount');
+    const storedTournamentStarted = localStorage.getItem('tournamentStarted');
+    const storedCurrentMatches = localStorage.getItem('currentMatches');
+
+    if (storedPlayers) {
+      players = JSON.parse(storedPlayers);
+    }
+    if (storedRoundNumber) {
+      roundNumber = parseInt(storedRoundNumber, 10);
+    }
+    if (storedByesCount) {
+      byesCount = parseInt(storedByesCount, 10);
+    }
+    if (storedTournamentStarted) {
+      tournamentStarted = storedTournamentStarted === 'true';
+    }
+    if (storedCurrentMatches) {
+      currentMatches = JSON.parse(storedCurrentMatches);
+    }
+  });
+
+  function saveStateToLocalStorage() {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('players', JSON.stringify(players));
+      localStorage.setItem('roundNumber', roundNumber.toString());
+      localStorage.setItem('byesCount', byesCount.toString());
+      localStorage.setItem('tournamentStarted', tournamentStarted.toString());
+      localStorage.setItem('currentMatches', JSON.stringify(currentMatches));
+    }
+  }
+
+  function OpenModal() {
+    isModalOpen = true;
+  }
+
+  function CloseModal() {
+    isModalOpen = false;
   }
 
   function addPlayer() {
     if (!playerName.trim()) {
       alert('Player name cannot be empty.');
+      return;
+    }
+
+    const existingPlayer = players.find(
+      (player) => player.name.toLowerCase() === playerName.trim().toLowerCase()
+    );
+
+    if (existingPlayer) {
+      alert('Player name already exists. Please choose a different name.');
+      playerName = '';
       return;
     }
 
@@ -50,6 +99,14 @@
 
     players = [...players, newPlayer];
     playerName = '';
+    saveStateToLocalStorage();
+  }
+
+  function deletePlayer(playerId: number) {
+    if (confirm('Are you sure you want to delete this player?')) {
+      players = players.filter((player) => player.id !== playerId);
+      saveStateToLocalStorage();
+    }
   }
 
   function pairPlayers(players: Player[]): Match[] {
@@ -107,9 +164,6 @@
     if (roundNumber >= maxRounds) {
       byesCount = 2;
     }
-
-    roundNumber++;
-
     players.forEach((player) => {
       player.tieBreaker = false;
     });
@@ -126,6 +180,8 @@
         match.player2.opponentDifficulty = calculateOpponentDifficulty(match.player2);
       }
     });
+
+    saveStateToLocalStorage();
   }
 
   function startTournament() {
@@ -170,6 +226,7 @@
         match.player2.opponents.push(match.player1.id);
       }
     });
+    roundNumber++;
 
     players.sort((a, b) => {
       if (b.points !== a.points) return b.points - a.points;
@@ -178,6 +235,7 @@
     });
 
     players = breakTies(players);
+    saveStateToLocalStorage();
 
     startNextRound();
   }
@@ -211,51 +269,24 @@
           return -1;
         }
 
-        const aDraws = a.opponents.filter((opponentId) => {
-          const opponent = players.find((p) => p.id === opponentId);
-          return opponent && opponent.points === a.points;
-        }).length;
-
-        const bDraws = b.opponents.filter((opponentId) => {
-          const opponent = players.find((p) => p.id === opponentId);
-          return opponent && opponent.points === b.points;
-        }).length;
-
-        if (bDraws > aDraws) {
-          b.tieBreaker = true;
-          return 1;
-        } else if (aDraws > bDraws) {
-          a.tieBreaker = true;
-          return -1;
-        }
-
         return 0;
       }
-      return b.points - a.points;
+      return 0;
     });
+  }
+  function endTournament() {
+    players = [];
+    roundNumber = 1;
+    byesCount = 0;
+    currentMatches = [];
+    CloseModal();
+    saveStateToLocalStorage();
+    tournamentStarted = false;
   }
 
   function calculateOpponentDifficulty(player: Player): number {
-    return player.opponents.reduce((totalDifficulty, opponentId) => {
-      const opponent = players.find((p) => p.id === opponentId);
-      if (opponent) {
-        return totalDifficulty + opponent.points;
-      }
-      return totalDifficulty;
-    }, 0);
-  }
-  function deletePlayer(id: number) {
-    players = players.filter((player) => player.id !== id);
-
-    players = players.map((player, index) => ({
-      ...player,
-      id: index + 1
-    }));
-  }
-
-  function endTournament() {
-    toggleModal();
-    window.location.reload();
+    const difficulty = player.points + player.victories * 2 - player.draws * 0.5;
+    return difficulty;
   }
 </script>
 
@@ -330,10 +361,10 @@
       class="flex flex-col sm:flex-row justify-between items-start space-y-8 sm:space-y-0 sm:space-x-8 m-4"
     >
       <div class="flex flex-col gap-4 w-full sm:w-1/3">
-        {#if byesCount <= 2}
-          <h3 class="text-3xl mb-4 text-center sm:text-left">Tournament In Progress</h3>
+        {#if byesCount >= 2}
+          <h3 class="text-3xl mb-4 text-center sm:text-left">Tournament <br />Finished</h3>
         {:else}
-          <h3 class="text-3xl mb-4 text-center sm:text-left">Tournament Finished</h3>
+          <h3 class="text-3xl mb-4 text-center sm:text-left">Tournament <br />In Progress</h3>
         {/if}
         {#each currentMatches as match (match.player1.id)}
           <div>
@@ -364,7 +395,7 @@
               >Submit Results</button
             >
           {/if}
-          <button class="btn btn-error" on:click={toggleModal}>End Tournament</button>
+          <button class="btn btn-error" on:click={OpenModal}>End Tournament</button>
           {#if isModalOpen}
             <dialog id="endTournamentModal" class="modal modal-open">
               <div class="modal-box">
@@ -374,7 +405,7 @@
                 </p>
                 <div class="modal-action">
                   <button class="btn btn-error" on:click={endTournament}>Yes, End</button>
-                  <button class="btn btn-primary" on:click={toggleModal}>Cancel</button>
+                  <button class="btn btn-primary" on:click={CloseModal}>Cancel</button>
                 </div>
               </div>
             </dialog>
