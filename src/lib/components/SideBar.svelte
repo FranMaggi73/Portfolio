@@ -70,6 +70,8 @@
       <li><a href="/calculator">Calculator</a></li>
       <div><div class="divider m-0 p-0" /></div>
       <li><a href="/weather">Weather App</a></li>
+      <div><div class="divider m-0 p-0" /></div>
+      <li><a href="/Tournament">Tournament</a></li>
     </ul>
   </div>
 </div>
