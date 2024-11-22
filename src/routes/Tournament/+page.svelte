@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Wheel from '$lib/components/Wheel.svelte';
   import { pageTitle } from '../../store/titleStore';
   pageTitle.set('Tournament');
 
@@ -28,6 +29,16 @@
   let tournamentStarted = false;
   let currentMatches: Match[] = [];
   let isModalOpen = false;
+  let resultRoulette: string | null = "";
+  $: wheelItems = players.map((player) => player.name);
+
+  const handleWheelResult = (event: CustomEvent<string>) => {
+    resultRoulette = event.detail;
+
+    if (typeof window !== 'undefined') {
+    localStorage.setItem('resultRoulette', resultRoulette);
+  }
+  };
 
   onMount(() => {
     const storedPlayers = localStorage.getItem('players');
@@ -35,6 +46,7 @@
     const storedByesCount = localStorage.getItem('byesCount');
     const storedTournamentStarted = localStorage.getItem('tournamentStarted');
     const storedCurrentMatches = localStorage.getItem('currentMatches');
+    const storedResultRoulette = localStorage.getItem('resultRoulette');
 
     if (storedPlayers) {
       players = JSON.parse(storedPlayers);
@@ -51,6 +63,9 @@
     if (storedCurrentMatches) {
       currentMatches = JSON.parse(storedCurrentMatches);
     }
+    if (storedResultRoulette) {
+    resultRoulette = storedResultRoulette;
+  }
   });
 
   function saveStateToLocalStorage() {
@@ -60,6 +75,7 @@
       localStorage.setItem('byesCount', byesCount.toString());
       localStorage.setItem('tournamentStarted', tournamentStarted.toString());
       localStorage.setItem('currentMatches', JSON.stringify(currentMatches));
+      localStorage.setItem('resultRoulette', resultRoulette || "");
     }
   }
 
@@ -279,9 +295,10 @@
     roundNumber = 1;
     byesCount = 0;
     currentMatches = [];
+    resultRoulette = "";
     CloseModal();
-    saveStateToLocalStorage();
     tournamentStarted = false;
+    saveStateToLocalStorage();
   }
 
   function calculateOpponentDifficulty(player: Player): number {
@@ -438,6 +455,11 @@
             {/each}
           </tbody>
         </table>
+        <div class="my-2 shadow-0 rounded-0">
+          <h2 class="text-xl font-bold my-2 text-center">Random Selector</h2>
+          <Wheel items={wheelItems} on:result={handleWheelResult} />
+          <h2 class="text-xl font-bold my-2 text-center">Selected Item: {resultRoulette}</h2>
+        </div>
       </div>
     </div>
   {/if}
