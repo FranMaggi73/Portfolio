@@ -29,15 +29,15 @@
   let tournamentStarted = false;
   let currentMatches: Match[] = [];
   let isModalOpen = false;
-  let resultRoulette: string | null = "";
+  let resultRoulette: string | null = '';
   $: wheelItems = players.map((player) => player.name);
 
   const handleWheelResult = (event: CustomEvent<string>) => {
     resultRoulette = event.detail;
 
     if (typeof window !== 'undefined') {
-    localStorage.setItem('resultRoulette', resultRoulette);
-  }
+      localStorage.setItem('resultRoulette', resultRoulette);
+    }
   };
 
   onMount(() => {
@@ -64,8 +64,8 @@
       currentMatches = JSON.parse(storedCurrentMatches);
     }
     if (storedResultRoulette) {
-    resultRoulette = storedResultRoulette;
-  }
+      resultRoulette = storedResultRoulette;
+    }
   });
 
   function saveStateToLocalStorage() {
@@ -75,7 +75,7 @@
       localStorage.setItem('byesCount', byesCount.toString());
       localStorage.setItem('tournamentStarted', tournamentStarted.toString());
       localStorage.setItem('currentMatches', JSON.stringify(currentMatches));
-      localStorage.setItem('resultRoulette', resultRoulette || "");
+      localStorage.setItem('resultRoulette', resultRoulette || '');
     }
   }
 
@@ -295,7 +295,7 @@
     roundNumber = 1;
     byesCount = 0;
     currentMatches = [];
-    resultRoulette = "";
+    resultRoulette = '';
     CloseModal();
     tournamentStarted = false;
     saveStateToLocalStorage();
