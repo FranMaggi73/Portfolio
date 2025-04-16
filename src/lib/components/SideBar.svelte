@@ -71,7 +71,9 @@
       <div><div class="divider m-0 p-0" /></div>
       <li><a href="/weather">Weather App</a></li>
       <div><div class="divider m-0 p-0" /></div>
-      <li><a href="/Tournament">Tournament</a></li>
+      <li><a href="/tournament">Tournament</a></li>
+      <div><div class="divider m-0 p-0" /></div>
+      <li><a href="/ecommerce">Ecommerce</a></li>
     </ul>
   </div>
 </div>
