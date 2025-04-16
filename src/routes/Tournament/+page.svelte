@@ -12,9 +12,9 @@
 
   let playerName = '';
   const maxNameLength = 19;
-  let isModalOpen = false; // Modal para confirmar finalizar el torneo
+  let isModalOpen = false;
   let showWheelModal = false;
-  let showDiceModal = false; // Controla la modal para dados
+  let showDiceModal = false;
   let resultRoulette: string | null = '';
   let diceResult: number | null = null;
 
@@ -29,7 +29,6 @@
 
   const handleDiceResult = (event: CustomEvent<number>) => {
     diceResult = event.detail;
-    // Por ejemplo, puedes almacenar el resultado o mostrarlo en la UI
     console.log('Dice result:', diceResult);
   };
 
@@ -74,7 +73,6 @@
 
 <div class="container mx-auto p-4">
   {#if !$tournamentStore.tournamentStarted && !$tournamentStore.tournamentFinished}
-    <!-- Sección para agregar jugadores y comenzar el torneo -->
     <div
       class="mb-4 text-3xl flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4"
     >

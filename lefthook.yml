@@ -2,8 +2,10 @@ pre-commit:
   parallel: true
   commands:
     check-svelte:
-      glob: '*.{js,ts,jsx,tsx,svelte}'
-      run: pnpm check {staged_files}
+      root: true
+      glob: "**/*.{js,ts,jsx,tsx,svelte}"
+      run: pnpm check --files {staged_files}
     lint:
-      glob: '*.{js,ts,jsx,tsx,svelte}'
-      run: pnpm lint {staged_files}
+      root: true
+      glob: "**/*.{js,ts,jsx,tsx,svelte}"
+      run: pnpm eslint --fix --no-error-on-unmatched-pattern {staged_files}
